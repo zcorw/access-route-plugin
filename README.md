@@ -1,27 +1,37 @@
-# access-route-plugin
+# 路由权限控制器
 
-> 结合鉴权与路由一体的插件
+结合vue-router快速构建起一套权限路由，并提供一系列快捷方法可以快速的查询节点权限。
 
-## Build Setup
+## 快速开始
 
-``` bash
-# install dependencies
-npm install
+```javascript
+import Vue from 'vue';
+import AccessRoute from 'access-route-plugin'
 
-# serve with hot reload at localhost:8080
-npm run dev
+Vue.use(AccessRoute);
 
-# build for production with minification
-npm run build
+const {access, route} = new AccessRoute(
+  routeOptions, // 路由配置
+);
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
+new Vue({
+  el: '#app',
+  route,
+  access,
+  // ...其他初始化必要的配置
+});
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 路由配置
+配置与 vue-router 配置类似，只是每个路由节点相应的增加一个 access 属性，用于该路由的权限判断，与权限节点标识一一对应。
+
+## 权限设置
+权限节点设置
+```javascript
+const {access, route} = new AccessRoute(
+  routeOptions, // 路由配置
+);
+
+access.init(callback);
+
+```
